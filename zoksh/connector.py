@@ -23,7 +23,7 @@ class Connector:
         signature = hmac.hexdigest()
         return {"ts": ts, "signature": signature}
 
-    def doRequest(self, options, data, resolve, reject):
+    def doRequest(self, options, data):
         conn = http.client.HTTPSConnection(options["hostname"])
 
         conn.request("POST", options["path"], body=data, headers=options["headers"])
@@ -40,7 +40,7 @@ class Connector:
                     "path": url.path,
                     "headers": options["headers"],
                 }
-                self.doRequest(opts, data, resolve, reject)
+                self.doRequest(opts, data)
                 return
             else:
                 raise ValueError("Server redirected too many times")
