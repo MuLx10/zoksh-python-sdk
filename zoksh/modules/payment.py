@@ -6,6 +6,9 @@ class ErrorCode:
 PATH_VALIDATE = "/v2/validate-payment"
 
 class Payment(ApiResource):
+    def __init__(self, connector: Connector):
+        super().__init__(connector)
+        
     def validate(self, transactionHash):
         if not transactionHash or transactionHash.strip() == "":
             raise ValueError(ErrorCode.TRANSACTION_MISSING)
