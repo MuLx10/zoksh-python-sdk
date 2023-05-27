@@ -8,6 +8,9 @@ class ErrorCode:
 PATH_CREATE = "/v2/order"
 
 class Order(ApiResource):
+    def __init__(self, connector: Connector):
+        super().__init__(connector)
+        
     def create(self, info):
         if "amount" not in info or not info["amount"]:
             raise ValueError(ErrorCode.INVALID_AMOUNT)
